@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <map>
 
 class BitcoinExchange {
 
@@ -17,7 +18,16 @@ public:
 		virtual const char* what() const throw();
 	};
 
+	static void	initializeDataFile();
+
 	BitcoinExchange();
+
+private:
+
+	static bool checkDateFormat(std::string date);
+	
+	std::map<std::string, size_t> _dataMap;
+
 };
 
 
