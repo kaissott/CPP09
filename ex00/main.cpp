@@ -3,7 +3,7 @@
 
 #include "BitcoinExchange.hpp"
 
-void	checkDateFormat(std::string date) {
+bool	checkDateFormat(std::string date) {
 
 	int daysIntMonths[12] = {31, 28, 31, 30,
 							31, 30, 31, 31,
@@ -17,62 +17,63 @@ void	checkDateFormat(std::string date) {
 
 	if (!std::getline(ss, year, '-')) {
 		std::cout << "Error: bad input ==> "<< date << std::endl;
-		return;
+		return false;
 	}
 
 	if (!std::getline(ss, month, '-')) {
 		std::cout << "Error: bad input ==> " << date << std::endl;
-		return;
+		return false;
 	}
 
 	if (!std::getline(ss, day)) {
 		std::cout << "Error: bad input ==> " << date << std::endl;
-		return;
+		return false;
 	}
 
 	for (size_t i = 0; i < year.size(); ++i) {
 		if (!std::isdigit(year[i])) {
 			std::cout << "Error: bad input ==> " << date << std::endl;
-			return;
+			return false;
 		}
 	}
 	for (size_t i = 0; i < month.size(); ++i) {
 		if (!std::isdigit(month[i])) {
 			std::cout << "Error: bad input ==> " << date << std::endl;
-			return;
+			return false;
 		}
 	}
 	for (size_t i = 0; i < day.size(); ++i) {
 		if (!std::isdigit(day[i])) {
 			std::cout << "Error: bad input ==> " << date << std::endl;
-			return;
+			return false;
 		}
 	}
 
 	int tmp = std::atoi(year.c_str());
 	if (tmp < 0)
-		return;
+		return false;
 	if ((tmp % 4 == 0 && tmp % 100 != 0) || tmp % 400 == 0) {
 		leapYear = true;
 	}
 
 	tmp = std::atoi(month.c_str());
 	if (tmp < 1 || tmp > 12) {
-		std::cerr << "Error: bad input ==> " << date << std::endl;
-		return;
+		std::cout << "Error: bad input ==> " << date << std::endl;
+		return false;
 	}
 	int m = tmp - 1;
 
 	tmp = std::atoi(day.c_str());
 	if (leapYear == true && m == 1) {
 		if (tmp > 29)
-			return;
+			return false;
 	}
 	else if (tmp < 0 || tmp > daysIntMonths[m]) {
-		std::cerr << "Error: bad input ==> " << date << std::endl;
-		return;
+		std::cout << "Error: bad input ==> " << date << std::endl;
+		return false;
 	}
 	std::cout << "Good input ==> " << date << std::endl;
+	return true;
 }
 
 void	openInputFile(BitcoinExchange &btc, const char *inputFile) {
@@ -88,10 +89,15 @@ void	openInputFile(BitcoinExchange &btc, const char *inputFile) {
 	std::string value;
 	while (std::getline(file, line)) {
 		size_t sep = line.find(',');
+		if (sep == std::string::npos) {
+			std::cout << "Error: bad input (missing separator) ==> " << line << std::endl;
+			continue;
+		}
 		date = line.substr(0, sep);
+		if (checkDateFormat(date) == false)
+			continue;
 		value = line.substr(sep + 1);
-		// std::cout << date << std::endl;
-		checkDateFormat(date);
+		// checkValue(value);
 	}
 }
 
