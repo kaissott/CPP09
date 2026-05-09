@@ -5,28 +5,19 @@
 
 bool	checkDateFormat(std::string date) {
 
-	int daysIntMonths[12] = {31, 28, 31, 30,
-							31, 30, 31, 31,
-							30, 31, 30, 31};
-	bool		leapYear = false;
-
+	const int daysIntMonths[12] =	{31, 28, 31, 30,
+									31, 30, 31, 31,
+									30, 31, 30, 31};
 	std::stringstream ss(date);
 	std::string year;
 	std::string month;
 	std::string day;
 
-	if (!std::getline(ss, year, '-')) {
+	bool		leapYear = false;
+
+	if (!std::getline(ss, year, '-') || !std::getline(ss, month, '-') ||
+		!std::getline(ss, day)) {
 		std::cout << "Error: bad input ==> "<< date << std::endl;
-		return false;
-	}
-
-	if (!std::getline(ss, month, '-')) {
-		std::cout << "Error: bad input ==> " << date << std::endl;
-		return false;
-	}
-
-	if (!std::getline(ss, day)) {
-		std::cout << "Error: bad input ==> " << date << std::endl;
 		return false;
 	}
 
@@ -61,7 +52,7 @@ bool	checkDateFormat(std::string date) {
 		std::cout << "Error: bad input ==> " << date << std::endl;
 		return false;
 	}
-	int m = tmp - 1;
+	const int m = tmp - 1;
 
 	tmp = std::atoi(day.c_str());
 	if (leapYear == true && m == 1) {
