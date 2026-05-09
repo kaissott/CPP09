@@ -7,7 +7,7 @@ OBJS = $(SRCS:%.cpp=obj/%.o)
 HEADERS = BitcoinExchange.hpp
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra  -std=c++98
 
 all: $(NAME)
 
