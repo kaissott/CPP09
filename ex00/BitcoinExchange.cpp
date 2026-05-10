@@ -1,6 +1,8 @@
 #include "BitcoinExchange.hpp"
 
 #include <cstdlib>
+#include <iostream>
+#include <sstream>
 
 BitcoinExchange::BitcoinExchange() {}
 
@@ -69,9 +71,21 @@ bool	BitcoinExchange::checkDateFormat(std::string date) {
 	return true;
 }
 
-void	checkValue(std::string date, std::string value) {
+void	checkValue(std::string &date, std::string &value) {
 
+	long	valueConverted = 0;
+	std::string				rest;
+	std::stringstream		ss(value);
 
+	if ((ss >> valueConverted) && !(ss >> rest)) {
+		if (valueConverted > 0) {
+			std::cout << "Good value : " << valueConverted << std::endl;
+		}
+	}
+	else {
+		std::cout << "Bad Value : " << valueConverted << " " << rest << std::endl;
+		return;
+	}
 
 }
 
@@ -86,7 +100,7 @@ void BitcoinExchange::initializeDataFile() {
 	std::string date;
 	std::string value;
 	while (std::getline(file, line)) {
-		size_t sep = line.find(',');
+		const size_t sep = line.find(',');
 		if (sep == std::string::npos) {
 			std::cout << "Error: bad input (missing separator) ==> " << line << std::endl;
 			continue;

@@ -1,0 +1,19 @@
+Checks: >
+  clang-analyzer-*,
+  performance-unnecessary-copy-initialization,
+  performance-for-range-copy,
+  readability-const-return-type,
+  readability-non-const-parameter,
+  misc-const-correctness,
+  misc-unused-parameters,
+  cppcoreguidelines-init-variables
+
+WarningsAsErrors: ""
+HeaderFilterRegex: ".*"
+CheckOptions:
+  - key: misc-const-correctness.AnalyzeValues
+    value: true
+  - key: misc-const-correctness.AnalyzeReferences
+    value: true
+  - key: misc-const-correctness.WarnPointersAsValues
+    value: false

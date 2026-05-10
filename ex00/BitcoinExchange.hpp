@@ -25,7 +25,7 @@ public:
 private:
 
 	static bool checkDateFormat(std::string date);
-	
+
 	std::map<std::string, size_t> _dataMap;
 
 };

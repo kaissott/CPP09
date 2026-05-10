@@ -1,0 +1,18 @@
+# .clangd
+CompileFlags:
+  Add: [-std=c++98]
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      [
+        misc-const-correctness,
+        readability-non-const-parameter,
+        misc-unused-parameters,
+        performance-unnecessary-copy-initialization,
+        performance-unnecessary-value-param,
+        clang-analyzer-*,
+        cppcoreguidelines-init-variables,
+      ]
+    Remove: [modernize-*, readability-magic-numbers]
+    FastCheckFilter: None
