@@ -20,4 +20,3 @@ int	main(int ac, char* av[]) {
 	}
 	std::cout << "Error : could not open file." << std::endl;
 }
-

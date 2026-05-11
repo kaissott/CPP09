@@ -18,15 +18,15 @@ public:
 		virtual const char* what() const throw();
 	};
 
-	static void	initializeDataFile();
-
+	void	initializeDataFile();
+	void	checkValue(std::string &date, std::string &value);
 	BitcoinExchange();
 
 private:
 
-	static bool checkDateFormat(std::string date);
+	bool checkDateFormat(std::string &date);
 
-	std::map<std::string, size_t> _dataMap;
+	std::map<std::string, float> _dataMap;
 
 };
 

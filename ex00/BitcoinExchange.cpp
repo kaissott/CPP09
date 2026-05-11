@@ -3,11 +3,12 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 BitcoinExchange::BitcoinExchange() {}
 
 
-bool	BitcoinExchange::checkDateFormat(std::string date) {
+bool	BitcoinExchange::checkDateFormat(std::string &date) {
 
 	const int daysIntMonths[12] =	{31, 28, 31, 30,
 									31, 30, 31, 31,
@@ -71,22 +72,22 @@ bool	BitcoinExchange::checkDateFormat(std::string date) {
 	return true;
 }
 
-void	checkValue(std::string &date, std::string &value) {
+void	BitcoinExchange::checkValue(std::string &date, std::string &value) {
 
-	long	valueConverted = 0;
+	float	valueConverted = 0;
 	std::string				rest;
 	std::stringstream		ss(value);
 
 	if ((ss >> valueConverted) && !(ss >> rest)) {
 		if (valueConverted > 0) {
 			std::cout << "Good value : " << valueConverted << std::endl;
+			this->_dataMap[date] = valueConverted;
 		}
 	}
 	else {
 		std::cout << "Bad Value : " << valueConverted << " " << rest << std::endl;
 		return;
 	}
-
 }
 
 
@@ -99,6 +100,8 @@ void BitcoinExchange::initializeDataFile() {
 	std::string line;
 	std::string date;
 	std::string value;
+
+	std::getline(file, line);
 	while (std::getline(file, line)) {
 		const size_t sep = line.find(',');
 		if (sep == std::string::npos) {
