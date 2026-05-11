@@ -5,7 +5,7 @@
 #include <time.h>
 #include <iostream>
 #include <sstream>
-
+#include <fstream>
 #include <map>
 
 class BitcoinExchange {
