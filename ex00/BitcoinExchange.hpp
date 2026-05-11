@@ -8,6 +8,12 @@
 #include <fstream>
 #include <map>
 
+enum	e_type {
+
+	DATA_FILE,
+	INPUT_FILE
+};
+
 class BitcoinExchange {
 
 
@@ -19,13 +25,15 @@ public:
 	};
 
 	void	initializeDataFile();
-	void	checkValue(std::string &date, std::string &value);
+	void	initializeInputFile(char *inputFile);
 	BitcoinExchange();
 
 private:
 
-	bool checkDateFormat(std::string &date);
-
+	void	checkValue(std::string &date, std::string &value);
+	void	checkInputValue(std::string &date, std::string &value);
+	bool 	checkDateFormat(std::string &date, e_type type);
+	void	findAndPrintDate(std::string &date, float value);
 	std::map<std::string, float> _dataMap;
 
 };

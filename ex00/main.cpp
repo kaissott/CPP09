@@ -13,10 +13,12 @@ int	main(int ac, char* av[]) {
 		BitcoinExchange btc;
 		try {
 			btc.initializeDataFile();
+			btc.initializeInputFile(av[1]);
 		}
 		catch (std::exception &e) {
 			std::cout << e.what() << std::endl;
 		}
 	}
-	std::cout << "Error : could not open file." << std::endl;
+	else
+		std::cout << "Error : could not open file." << std::endl;
 }
