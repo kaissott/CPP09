@@ -4,16 +4,16 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
+#include <vector>
 
 void    PmergeMe::VectorAlgorithm(int *numberTab, int index) {
 
-    for (int i = 0; i < index; ++i) {
-        this->vectorAlg.push_back(numberTab[i]);
+    std::vector<WLpairs> pairs;
+
+    for (int i = 0; i < index; i += 2) {
+        
     }
 
-     for (int i = 0; i < index; ++i) {
-        std::cout << vectorAlg[i] << std::endl;
-    }
 }
 
 PmergeMe::PmergeMe(int ac, char **av) {
@@ -22,7 +22,7 @@ PmergeMe::PmergeMe(int ac, char **av) {
 
     for (int i = 1; i < ac; ++i) {
 
-        for (int j = 0; av[i][j] != '\0'; ++j){
+        for (int j = 0; av[i][j] != '\0'; ++j) {
             if (std::isdigit(av[i][j]) == 0) {
                 std::cout << "Error" << std::endl;
                 return;
@@ -31,9 +31,6 @@ PmergeMe::PmergeMe(int ac, char **av) {
         const int tmp = std::atoi(av[i]);
         numbersTab[i - 1] = tmp;
     }
-
-   
-
     VectorAlgorithm(numbersTab, ac - 1);
 }
 
