@@ -22,7 +22,7 @@ RPN::RPN(char *args) {
             stockResult(expression[i]);
             isSpace = true;
         }
-        else if (isSpace == true && expression[i] == ' '){
+        else if (expression[i] == ' ' && isSpace == true){
             isSpace = false;
         }
         else {
