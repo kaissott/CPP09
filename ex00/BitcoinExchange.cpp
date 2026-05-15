@@ -176,6 +176,7 @@ void	BitcoinExchange::initializeInputFile(char *inputFile) {
 	std::string date;
 	std::string value;
 
+	std::getline(file, line);
 	while(std::getline(file, line)) {
 		const size_t sep = line.find('|');
 		if (sep == std::string::npos) {
